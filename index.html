@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio de projetos em Power BI, Dados e Business Intelligence.">
+  <title>Luciana Matheus | Power BI & Dados</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #F8F7F4;
+      --surface: #FFFFFF;
+      --surface-2: #F1F4F3;
+      --text: #263238;
+      --muted: #667085;
+      --accent: #8BBFC2;
+      --accent-2: #BFA8D6;
+      --accent-soft: rgba(139, 191, 194, .18);
+      --border: rgba(38, 50, 56, .10);
+      --max: 1120px;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        radial-gradient(circle at 80% 10%, rgba(139,191,194,.16), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Source Sans 3", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(100% - 40px, var(--max));
+      margin-inline: auto;
+    }
+
+    .section { padding: 100px 0; }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3, nav, .button {
+      font-family: "Outfit", sans-serif;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 5.4rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+      max-width: 850px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -.035em;
+      margin-bottom: 18px;
+    }
+
+    h3 { font-size: 1.25rem; }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 46px;
+    }
+
+    .section-heading p,
+    .hero p,
+    .about-copy p,
+    .project-content p,
+    .journey-item p,
+    .contact-box p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    /* NAV */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 18px 0;
+      transition: .3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(248,247,244,.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: "Outfit", sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .logo span { color: var(--accent-2); }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-family: "Outfit", sans-serif;
+      font-size: .92rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .menu-button {
+      display: none;
+      background: none;
+      border: 0;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      opacity: .18;
+      background-image:
+        linear-gradient(rgba(38,50,56,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(38,50,56,.035) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      margin-top: 24px;
+      font-family: "Outfit", sans-serif;
+      font-size: clamp(1.15rem, 3vw, 1.55rem);
+      color: #44545A;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin-top: 18px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: .92rem;
+      font-weight: 600;
+      transition: transform .2s, border-color .2s, background .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(139,191,194,.55);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #263238;
+      border-color: var(--accent);
+    }
+
+    .button.secondary { background: rgba(255,255,255,.75); }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .about-copy p + p { margin-top: 18px; }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      padding: 9px 13px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 999px;
+      color: #44545A;
+      font-size: .9rem;
+    }
+
+    /* PROJECTS */
+    .projects {
+      display: grid;
+      gap: 24px;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(139,191,194,.45);
+      box-shadow: 0 20px 50px rgba(38,50,56,.10);
+    }
+
+    .dashboard-image {
+      min-height: 330px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: var(--surface-2);
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .dashboard-image img {
+      width: 100%;
+      height: auto;
+      max-height: 430px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(38,50,56,.08);
+    }
+
+    .dashboard-placeholder {
+      min-height: 330px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      background:
+        linear-gradient(135deg, rgba(139,191,194,.18), transparent 55%),
+        var(--surface-2);
+      border-right: 1px solid var(--border);
+    }
+
+    .placeholder-chart {
+      width: min(100%, 390px);
+      padding: 20px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.82);
+      border-radius: 14px;
+    }
+
+    .chart-title {
+      color: #44545A;
+      font-family: "Outfit", sans-serif;
+      margin-bottom: 20px;
+    }
+
+    .bars {
+      height: 145px;
+      display: flex;
+      align-items: end;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bar {
+      flex: 1;
+      height: var(--h);
+      background: linear-gradient(to top, rgba(191,168,214,.35), var(--accent));
+      border-radius: 5px 5px 0 0;
+      opacity: .75;
+    }
+
+    .placeholder-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .8rem;
+      text-align: center;
+    }
+
+    .project-content { padding: 36px; }
+
+    .project-content h3 { margin-bottom: 10px; font-size: 1.55rem; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .tag {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(139,191,194,.25);
+      padding: 5px 9px;
+      border-radius: 6px;
+      font-size: .78rem;
+    }
+
+    .analysis-list {
+      margin: 18px 0 26px 18px;
+      color: var(--muted);
+    }
+
+    /* JOURNEY */
+    .timeline {
+      position: relative;
+      max-width: 820px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 7px;
+      bottom: 7px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .journey-item {
+      position: relative;
+      padding-left: 38px;
+      padding-bottom: 36px;
+    }
+
+    .journey-item:last-child { padding-bottom: 0; }
+
+    .dot {
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--accent);
+    }
+
+    .journey-item h3 { margin-bottom: 7px; }
+
+    /* LEARNING */
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .learning-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .learning-card h3 { margin-bottom: 6px; }
+
+    .learning-card p { color: var(--muted); }
+
+    /* CONTACT */
+    .contact-box {
+      padding: clamp(30px, 6vw, 64px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 90% 10%, rgba(191,168,214,.14), transparent 35%),
+        var(--surface);
+    }
+
+    .contact-box p { max-width: 650px; }
+
+    /* FOOTER */
+    footer {
+      padding: 35px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    footer p { color: var(--muted); font-size: .9rem; }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-family: "Outfit", sans-serif;
+      font-size: .9rem;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ANIMATION */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      .container { width: min(100% - 28px, var(--max)); }
+      .section { padding: 76px 0; }
+
+      .menu-button { display: block; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 14px;
+        right: 14px;
+        padding: 20px;
+        flex-direction: column;
+        gap: 16px;
+        background: rgba(255,255,255,.97);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .about-grid,
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-image {
+        min-height: 260px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .dashboard-placeholder {
+        min-height: 260px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .project-content { padding: 26px; }
+
+      .learning-grid { grid-template-columns: 1fr; }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#inicio" class="logo">Luciana<span>Matheus</span></a>
+
+      <button class="menu-button" id="menuButton" aria-label="Abrir menu" aria-expanded="false">
+        ☰
+      </button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#sobre">Sobre mim</a></li>
+          <li><a href="#habilidades">Habilidades</a></li>
+          <li><a href="#formacao">Formação</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#jornada">Jornada</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="hero-grid"></div>
+      <div class="container hero-content reveal">
+        <div class="eyebrow">Dados • Power BI • Business Intelligence</div>
+        <h1>Construindo minha jornada em <span>Dados.</span></h1>
+        <div class="hero-subtitle">Analista de Dados em formação | Power BI | Business Intelligence</div>
+        <p>
+          Estou iniciando minha trajetória na área de Dados e desenvolvendo conhecimentos
+          por meio de estudos e projetos práticos em Power BI, análise e visualização de dados.
+        </p>
+
+        <div class="actions">
+          <a href="#projetos" class="button primary">Ver projetos</a>
+          <a href="https://www.linkedin.com/in/lucianamatheusb" class="button secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/lucianamatheusb" class="button secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="section" id="sobre">
+      <div class="container about-grid">
+        <div class="about-copy reveal">
+          <div class="eyebrow">Sobre mim</div>
+          <h2>Aprendizado que se transforma em projetos.</h2>
+          <p>
+            Estou iniciando minha trajetória na área de Dados e desenvolvendo meus conhecimentos
+            em Power BI e Business Intelligence por meio de cursos, imersões e projetos práticos.
+          </p>
+          <p>
+            Este portfólio reúne minha evolução em análise de dados, tratamento de informações,
+            criação de indicadores, visualização de dados e construção de dashboards.
+          </p>
+          <p>
+            Meu objetivo é aprender continuamente e transformar dados em informações que possam
+            apoiar análises e decisões de negócio.
+          </p>
+        </div>
+
+        <div class="reveal" id="habilidades">
+          <div class="eyebrow">Conhecimentos</div>
+          <h3 style="margin-bottom:18px;">Ferramentas e conceitos</h3>
+          <div class="skills">
+            <span class="skill">Power BI</span>
+            <span class="skill">Power Query</span>
+            <span class="skill">DAX</span>
+            <span class="skill">Modelagem de Dados</span>
+            <span class="skill">Visualização de Dados</span>
+            <span class="skill">Business Intelligence</span>
+            <span class="skill">Excel</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMAÇÃO -->
+    <section class="section" id="formacao">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Formação</div>
+          <h2>Minha base em tecnologia.</h2>
+        </div>
+        <div class="learning-grid">
+          <article class="learning-card reveal">
+            <h3>Análise e Desenvolvimento de Sistemas</h3>
+            <p>Centro Universitário UNA — UNA</p>
+          </article>
+          <article class="learning-card reveal">
+            <h3>Técnico em Informática</h3>
+            <p>SENAI</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section class="section" id="projetos">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Projetos</div>
+          <h2>Projetos em Power BI</h2>
+          <p>
+            Projetos práticos desenvolvidos durante minha jornada de aprendizado em
+            Dados e Business Intelligence.
+          </p>
+        </div>
+
+        <div class="projects">
+
+          <article class="project-card reveal">
+            <div class="dashboard-image">
+              <img src="financas-pessoais-portfolio-cortada.png" alt="Dashboard de Finanças Pessoais desenvolvido em Power BI">
+            </div>
+            <div class="project-content">
+              <div class="eyebrow">Projeto 01 · Imersão Power BI</div>
+              <h3>Análise de Finanças Pessoais</h3>
+              <p>Projeto prático com tratamento e organização dos dados e construção de um relatório para acompanhar receitas e despesas.</p>
+              <div class="tags">
+                <span class="tag">Power BI</span><span class="tag">Power Query</span><span class="tag">Excel</span>
+              </div>
+              <ul class="analysis-list">
+                <li>Receita por categoria: salário, investimentos e consultoria</li>
+                <li>Receita e despesa por ano</li>
+                <li>Receita e despesa por mês</li>
+                <li>Despesas por categoria</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="dashboard-image">
+              <img src="valores-comissao-portfolio.png" alt="Dashboard de Valores de Comissão desenvolvido em Power BI">
+            </div>
+            <div class="project-content">
+              <div class="eyebrow">Projeto 02 · Imersão Power BI</div>
+              <h3>Análise de Valores de Comissão</h3>
+              <p>Projeto prático de análise de comissões, com tratamento dos dados e criação de indicadores e visualizações.</p>
+              <div class="tags">
+                <span class="tag">Power BI</span><span class="tag">Power Query</span><span class="tag">Excel</span>
+              </div>
+              <ul class="analysis-list">
+                <li>Valor bruto por status do pedido</li>
+                <li>Total de comissão</li>
+                <li>Valor bruto</li>
+                <li>Valor líquido</li>
+                <li>Comissão por mês</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-card reveal">
+            <div class="dashboard-image">
+              <img src="vendas-de-bebidas-portfolio.png" alt="Dashboard de Vendas de Bebidas desenvolvido em Power BI">
+            </div>
+            <div class="project-content">
+              <div class="eyebrow">Projeto 03 · Imersão Power BI</div>
+              <h3>Análise de Vendas de Bebidas</h3>
+              <p>Projeto desenvolvido com dados de Excel e TXT, incluindo tratamento das bases, criação do relatório e aplicação de um tema visual personalizado da empresa.</p>
+              <div class="tags">
+                <span class="tag">Power BI</span><span class="tag">Power Query</span><span class="tag">Excel</span><span class="tag">TXT</span>
+              </div>
+              <ul class="analysis-list">
+                <li>Receita total, custo total e lucro total</li>
+                <li>Maior venda realizada</li>
+                <li>Quantidade de vendas</li>
+                <li>Valor médio de vendas por marca</li>
+                <li>Lucro por região</li>
+                <li>Margem mensal</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Para adicionar futuros projetos, duplique um article.project-card e altere imagem e conteúdo. -->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- JORNADA -->
+    <section class="section" id="jornada">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Minha jornada</div>
+          <h2>Aprendendo, praticando e evoluindo.</h2>
+          <p>
+            Uma trajetória construída por meio de estudos e aplicação prática dos conhecimentos.
+          </p>
+        </div>
+
+        <div class="timeline">
+
+          <div class="journey-item reveal">
+            <span class="dot"></span>
+            <h3>Início da jornada</h3>
+            <p>Início dos estudos na área de Dados e Business Intelligence.</p>
+          </div>
+
+          <div class="journey-item reveal">
+            <span class="dot"></span>
+            <h3>Power BI</h3>
+            <p>Desenvolvimento de conhecimentos em Power BI, criação de dashboards e visualização de dados.</p>
+          </div>
+
+          <div class="journey-item reveal">
+            <span class="dot"></span>
+            <h3>Power Query</h3>
+            <p>Aprendizado sobre tratamento, transformação e preparação dos dados.</p>
+          </div>
+
+          <div class="journey-item reveal">
+            <span class="dot"></span>
+            <h3>DAX</h3>
+            <p>Desenvolvimento de conhecimentos para criação de métricas e análises no Power BI.</p>
+          </div>
+
+          <div class="journey-item reveal">
+            <span class="dot"></span>
+            <h3>Projetos práticos</h3>
+            <p>Aplicação dos conhecimentos em projetos e atividades práticas.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- APRENDIZADOS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Aprendizados</div>
+          <h2>O que estou desenvolvendo.</h2>
+          <p>Conhecimentos que estão sendo construídos e aplicados nos projetos.</p>
+        </div>
+
+        <div class="learning-grid">
+          <article class="learning-card reveal">
+            <h3>Tratamento de dados</h3>
+            <p>Organização, transformação e preparação de bases para análise.</p>
+          </article>
+
+          <article class="learning-card reveal">
+            <h3>Indicadores</h3>
+            <p>Construção e acompanhamento de indicadores para apoiar análises.</p>
+          </article>
+
+          <article class="learning-card reveal">
+            <h3>Dashboards</h3>
+            <p>Criação de visualizações organizadas para facilitar a interpretação dos dados.</p>
+          </article>
+
+          <article class="learning-card reveal">
+            <h3>Modelagem</h3>
+            <p>Desenvolvimento de conhecimentos sobre organização e relacionamento dos dados.</p>
+          </article>
+
+          <article class="learning-card reveal">
+            <h3>Power Query</h3>
+            <p>Tratamento e transformação de dados dentro do Power BI.</p>
+          </article>
+
+          <article class="learning-card reveal">
+            <h3>DAX</h3>
+            <p>Desenvolvimento de medidas e análises para os relatórios.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="contact-box reveal">
+          <div class="eyebrow">Contato</div>
+          <h2>Vamos nos conectar?</h2>
+          <p>
+            Estou construindo minha trajetória na área de Dados e sempre em busca de
+            novos conhecimentos e projetos para desenvolver minhas habilidades.
+          </p>
+
+          <div class="actions">
+            <a href="https://www.linkedin.com/in/lucianamatheusb" class="button primary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/lucianamatheusb" class="button secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:lucianamatheusb@gmail.com" class="button secondary">E-mail</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>Luciana Matheus · Analista de Dados em formação | Power BI | Business Intelligence</p>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/lucianamatheusb" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/lucianamatheusb" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar com efeito de blur durante a rolagem
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+      navbar.classList.toggle("scrolled", window.scrollY > 20);
+    });
+
+    // Menu mobile
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", isOpen);
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Animação de entrada das seções
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(element => {
+      observer.observe(element);
+    });
+
+    // Ano automático no footer, se necessário
+    // O texto do footer pode ser personalizado diretamente no HTML.
+  </script>
+
+</body>
+</html>
